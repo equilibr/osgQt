@@ -9,17 +9,16 @@ TEMPLATE = app
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
-INCLUDEPATH += ../../libraries/OpenSceneGraph/install/include/
-LIBS += -L../../libraries/OpenSceneGraph/install/bin/
+win: {
+#Change this to point to where osg is installed
+INCLUDEPATH += /include/
+LIBS += -L./libs/
+}
 
 LIBS += -losg
 LIBS += -losgViewer
-LIBS += -losgText
 LIBS += -losgGA
 LIBS += -losgWidget
-LIBS += -losgDB
-LIBS += -losgUtil
-LIBS += -lOpenThreads
 
 DESTDIR = ../bin
 
