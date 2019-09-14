@@ -6,7 +6,6 @@
 #include <osg/Material>
 
 #include "QtOSGWidget.h"
-#include "QtOSGMouseHandler.h"
 
 
 osg::Geode * setupScene()
