@@ -17,16 +17,16 @@ DESTDIR = ../bin
 
 
 SOURCES += \
-	demoscene.cpp \
+	QtOSGMouseMapper.cpp \
+	demosupport.cpp \
 	demowindow.cpp \
 	main.cpp \
-	QtOSGWidget.cpp \
-	QtOSGMouseHandler.cpp
+	QtOSGWidget.cpp
 
 HEADERS += \
+	QtOSGMouseMapper.h \
 	QtOSGWidget.h \
-	QtOSGMouseHandler.h \
-	demoscene.h \
+	demosupport.h \
 	demowindow.h
 
 FORMS +=

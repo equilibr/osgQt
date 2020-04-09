@@ -1,9 +1,8 @@
 #include "QtOSGWidget.h"
-#include "QtOSGMouseHandler.h"
 
-#include <osgGA/TrackballManipulator>
+using namespace QtOSG;
 
-QtOSGWidget::QtOSGWidget(
+Widget::Widget(
 		osgViewer::Viewer * viewer,
 		osg::Camera * camera,
 		QWidget * parent)
@@ -18,23 +17,24 @@ QtOSGWidget::QtOSGWidget(
 			height()))
 
 {
+	setMainCamera(camera);
+}
+
+void Widget::setMainCamera(osg::Camera *camera)
+{
+	if (camera == nullptr)
+		return;
+
 	viewer->setCamera(camera);
 	camera->setGraphicsContext( graphicsWindow.get() );
 }
 
-void QtOSGWidget::setupDefaultCameraManipulator()
+void Widget::resizeGL(int w, int h)
 {
-	//Setup a camera manupulator
-	osgGA::TrackballManipulator* manipulator = new osgGA::TrackballManipulator;
-	manipulator->setAllowThrow( false );
-	viewer->setCameraManipulator(manipulator);
+	//A sanity check
+	if (viewer->getCamera() == nullptr)
+		return;
 
-	//Setup a mouse handler for the camera manupulator
-	new QtOSGMouseHandler(this);
-}
-
-void QtOSGWidget::resizeGL(int w, int h)
-{
 	const int _x = x();
 	const int _y = y();
 
@@ -43,7 +43,7 @@ void QtOSGWidget::resizeGL(int w, int h)
 	viewer->getCamera()->setViewport(0, 0, w, h);
 }
 
-void QtOSGWidget::paintGL()
+void Widget::paintGL()
 {
 	viewer->frame();
 }

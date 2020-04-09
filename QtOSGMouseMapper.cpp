@@ -1,6 +1,8 @@
-#include "QtOSGMouseHandler.h"
+#include "QtOSGMouseMapper.h"
 
-bool QtOSGMouseHandler::eventFilter(QObject * obj, QEvent * event)
+using namespace QtOSG;
+
+bool MouseMapper::eventFilter(QObject * obj, QEvent * event)
 {
 	static auto convertButton =
 			[](Qt::MouseButton b) -> unsigned int
@@ -18,7 +20,7 @@ bool QtOSGMouseHandler::eventFilter(QObject * obj, QEvent * event)
 		}
 	};
 
-	QtOSGWidget * o = static_cast<QtOSGWidget *>(obj);
+	Widget * o = static_cast<Widget *>(obj);
 
 	switch (event->type())
 	{

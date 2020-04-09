@@ -1,39 +1,33 @@
 #include "demowindow.h"
 
-#include <QTimer>
+#include "QtOSGMouseMapper.h"
 
 DemoWindow::DemoWindow(QWidget *parent) :
 	QMainWindow(parent),
-	widget{new QtOSGWidget(this, true)}
+	widget{new QtOSG::Widget(this)}
 {
-	//For the demo:
-	//There is only a single widget to show
+	//There is only a single widget to show - the OSG widget
 	setCentralWidget(widget);
 
 	//For the demo:
 	//Setup the camera so it will be pleasant to look into
-	setupCamera();
+	QtOsgDemo::setupCamera(widget);
+
+	//For the demo:
+	//Setup a camera manipulator.
+	//Since the manipulator reacts on mouse events the mouse handler should be installed.
+	QtOsgDemo::setupCameraManipulator(widget);
+
+	//Setup a mouse mapper that translates Qt mouse events to OSG mouse events.
+	//This handler is a simple event translator and can be used whenever the OSG view
+	//	should react to mouse events.
+	new QtOSG::MouseMapper(widget);
 
 	//Set the scene the main widget should display.
 	//This should be after the camera setup - otherwise the camera manipulator
 	//	will reset.
-	widget->setSceneData(scene.sceneRoot());
+	widget->setSceneData(QtOsgDemo::createScene());
 
-	//By default the rendered OSG view will only be updated when the
-	// camera manipulator processes a mouse event or when the widget is resized
-}
-
-void DemoWindow::setupCamera()
-{
-	widget->getCamera()->setClearColor( osg::Vec4( 0.9f, 0.9f, 1.f, 1.f ) );
-
-	//Calculate the projection aspect ration based on the current widget dimentions
-	double aspectRatio = widget->width();
-	aspectRatio /= widget->height();
-	widget->getCamera()->setProjectionMatrixAsPerspective(30, aspectRatio, 1, 1000);
-
-	widget->getViewer()->getCameraManipulator()->setHomePosition(
-	{-2,0,1},
-	{0,0,0},
-	{0,0,1});
+	//By default the rendered OSG view will only be updated when the widget is resized.
+	//If a mouse handler is installed the view will also be updated when a mouse event is recieved
 }
