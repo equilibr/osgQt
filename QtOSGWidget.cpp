@@ -27,7 +27,7 @@ void QtOSGWidget::setupDefaultCameraManipulator()
 	//Setup a camera manupulator
 	osgGA::TrackballManipulator* manipulator = new osgGA::TrackballManipulator;
 	manipulator->setAllowThrow( false );
-	viewer.get()->setCameraManipulator(manipulator);
+	viewer->setCameraManipulator(manipulator);
 
 	//Setup a mouse handler for the camera manupulator
 	new QtOSGMouseHandler(this);
@@ -38,12 +38,12 @@ void QtOSGWidget::resizeGL(int w, int h)
 	const int _x = x();
 	const int _y = y();
 
-	graphicsWindow.get()->getEventQueue()->windowResize(_x, _y, w, h);
-	graphicsWindow.get()->resized(_x, _y, w, h);
-	viewer.get()->getCamera()->setViewport(0, 0, w, h);
+	graphicsWindow->getEventQueue()->windowResize(_x, _y, w, h);
+	graphicsWindow->resized(_x, _y, w, h);
+	viewer->getCamera()->setViewport(0, 0, w, h);
 }
 
 void QtOSGWidget::paintGL()
 {
-	viewer.get()->frame();
+	viewer->frame();
 }

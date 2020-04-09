@@ -13,7 +13,7 @@ class QtOSGWidget : public QOpenGLWidget
 
 	public:
 		explicit
-		QtOSGWidget(QWidget* parent = nullptr, bool setupCameraManipulator = true)
+		QtOSGWidget(QWidget* parent = nullptr, bool setupCameraManipulator = false)
 			: QtOSGWidget(new osgViewer::Viewer, new osg::Camera, parent)
 		{
 			if (setupCameraManipulator)
@@ -32,18 +32,21 @@ class QtOSGWidget : public QOpenGLWidget
 				osg::Camera * camera,
 				QWidget* parent = nullptr);
 
-		osg::Camera * getCamera() { return viewer.get()->getCamera(); }
+		osg::ref_ptr<osg::Camera> getCamera() { return viewer->getCamera(); }
 		osg::ref_ptr<osgViewer::Viewer> & getViewer() { return viewer; }
 		osg::ref_ptr<osgViewer::GraphicsWindowEmbedded> & getGraphicsWindow() { return graphicsWindow; }
 
 		//Helper function to set the scene root
-		virtual void setSceneData(osg::Node* node)
+		template<class T> void setSceneData( const osg::ref_ptr<T> & node )
+		{ setSceneData(node.get()); }
+
+		void setSceneData(osg::Node * node)
 		{
-			viewer.get()->setSceneData(node);
+			viewer->setSceneData(node);
 		}
 
-	protected:
 		void setupDefaultCameraManipulator();
+	protected:
 		virtual void resizeGL(int w, int h) override;
 		virtual void paintGL() override;
 
