@@ -9,12 +9,6 @@ TEMPLATE = app
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
-win32: {
-#Change this to point to where osg is installed
-INCLUDEPATH += ../../libraries/OpenSceneGraph/install/include
-LIBS += -L../../libraries/OpenSceneGraph/install/lib
-}
-
 LIBS += -losg
 LIBS += -losgViewer
 LIBS += -losgGA
@@ -23,12 +17,16 @@ DESTDIR = ../bin
 
 
 SOURCES += \
+	demoscene.cpp \
+	demowindow.cpp \
 	main.cpp \
 	QtOSGWidget.cpp \
 	QtOSGMouseHandler.cpp
 
 HEADERS += \
 	QtOSGWidget.h \
-	QtOSGMouseHandler.h
+	QtOSGMouseHandler.h \
+	demoscene.h \
+	demowindow.h
 
 FORMS +=

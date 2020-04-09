@@ -13,7 +13,7 @@ class QtOSGWidget : public QOpenGLWidget
 
 	public:
 		explicit
-		QtOSGWidget(QWidget* parent = nullptr, bool setupCameraManipulator = false)
+		QtOSGWidget(QWidget* parent = nullptr, bool setupCameraManipulator = true)
 			: QtOSGWidget(new osgViewer::Viewer, new osg::Camera, parent)
 		{
 			if (setupCameraManipulator)
