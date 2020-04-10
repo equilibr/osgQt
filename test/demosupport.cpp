@@ -3,7 +3,7 @@
 #include <osg/ShapeDrawable>
 #include <osg/StateSet>
 #include <osg/Material>
-#include <osgGA/TrackballManipulator>
+#include <osgGA/DriveManipulator>
 
 osg::Geode * osgQtDemo::createScene()
 {
@@ -28,10 +28,9 @@ void osgQtDemo::setupCameraManipulator(osgQt::Widget *widget)
 {
 	//Setup a camera manupulator
 
-	osgGA::TrackballManipulator* manipulator = new osgGA::TrackballManipulator;
-	manipulator->setAllowThrow( false );
-	widget->getViewer()->setCameraManipulator(manipulator);
+	osgGA::DriveManipulator * manipulator = new osgGA::DriveManipulator;
 
+	widget->getViewer()->setCameraManipulator(manipulator);
 	widget->getViewer()->getCameraManipulator()->setHomePosition(
 	{-2,0,1},
 	{0,0,0},

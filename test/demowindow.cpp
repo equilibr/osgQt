@@ -29,6 +29,9 @@ DemoWindow::DemoWindow(QWidget *parent) :
 	//	should react to keyboard events.
 	new osgQt::KeyboardMapper(widget);
 
+	//Enable the widget to receive key events
+	widget->setFocusPolicy(Qt::StrongFocus);
+
 	//Set the scene the main widget should display.
 	//This should be after the camera setup - otherwise the camera manipulator
 	//	will reset.
