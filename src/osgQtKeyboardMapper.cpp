@@ -24,27 +24,27 @@ SOFTWARE.
 
 #include "osgQtKeyboardMapper.h"
 
-#include <QMap>
+#include <QHash>
 
 namespace osgQt
 {
-	const QMap<int,int> initializeKey()
+	const QHash<int,int> initializeKey()
 	{
-		QMap<int,int> map;
+		QHash<int,int> map;
 
 		return map;
 	}
 
-	const QMap<int,int> initializeUnmodifiedKey()
+	const QHash<int,int> initializeUnmodifiedKey()
 	{
-		QMap<int,int> map;
+		QHash<int,int> map;
 
 		return map;
 	}
 
 	//Maps to convert the key values
-	static const QMap<int,int> keyMap = initializeKey();
-	static const QMap<int,int> unmodifiedKeyMap = initializeUnmodifiedKey();
+	static const QHash<int,int> keys = initializeKey();
+	static const QHash<int,int> unmodifiedKeys = initializeUnmodifiedKey();
 
 	int key(const QKeyEvent * e)
 	{
