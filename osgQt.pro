@@ -20,12 +20,14 @@ SOURCES += \
 	demosupport.cpp \
 	demowindow.cpp \
 	main.cpp \
+	osgQtKeyboardMapper.cpp \
 	osgQtMouseMapper.cpp \
 	osgQtWidget.cpp
 
 HEADERS += \
 	demosupport.h \
 	demowindow.h \
+	osgQtKeyboardMapper.h \
 	osgQtMouseMapper.h \
 	osgQtWidget.h
 

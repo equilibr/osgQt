@@ -1,6 +1,7 @@
 #include "demowindow.h"
 
 #include "osgQtMouseMapper.h"
+#include "osgQtKeyboardMapper.h"
 
 DemoWindow::DemoWindow(QWidget *parent) :
 	QMainWindow(parent),
@@ -22,6 +23,11 @@ DemoWindow::DemoWindow(QWidget *parent) :
 	//This handler is a simple event translator and can be used whenever the OSG view
 	//	should react to mouse events.
 	new osgQt::MouseMapper(widget);
+
+	//Setup a keyboard mapper that translates Qt keyboard events to OSG keyboard events.
+	//This handler is a simple event translator and can be used whenever the OSG view
+	//	should react to keyboard events.
+	new osgQt::KeyboardMapper(widget);
 
 	//Set the scene the main widget should display.
 	//This should be after the camera setup - otherwise the camera manipulator

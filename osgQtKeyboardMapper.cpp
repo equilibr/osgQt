@@ -22,52 +22,46 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "osgQtWidget.h"
+#include "osgQtKeyboardMapper.h"
 
 using namespace osgQt;
 
-Widget::Widget(
-		osgViewer::Viewer * viewer,
-		osg::Camera * camera,
-		QWidget * parent)
-	:
-	QOpenGLWidget(parent),
-	viewer(viewer),
-	graphicsWindow(
-		viewer->setUpViewerAsEmbeddedInWindow(
-			x(),
-			y(),
-			width(),
-			height()))
-
+bool KeyboardMapper::eventFilter(QObject * obj, QEvent * event)
 {
-	setMainCamera(camera);
-}
+	Widget * o = static_cast<Widget *>(obj);
 
-void Widget::setMainCamera(osg::Camera *camera)
-{
-	if (camera == nullptr)
-		return;
+	switch (event->type())
+	{
+		case QEvent::KeyPress:
+		case QEvent::KeyRelease:
+		{
+			const QKeyEvent * e = static_cast<QKeyEvent *>(event);
 
-	viewer->setCamera(camera);
-	camera->setGraphicsContext( graphicsWindow.get() );
-}
+			int key;
+			int unmodifiedKey;
 
-void Widget::resizeGL(int w, int h)
-{
-	//A sanity check
-	if (viewer->getCamera() == nullptr)
-		return;
+			switch (event->type())
+			{
+				case QEvent::KeyPress:
+					o->getGraphicsWindow().get()->getEventQueue()->keyPress(key, unmodifiedKey);
+					break;
 
-	const int _x = x();
-	const int _y = y();
+				case QEvent::KeyRelease:
+					o->getGraphicsWindow().get()->getEventQueue()->keyRelease(key, unmodifiedKey);
+					break;
 
-	graphicsWindow->getEventQueue()->windowResize(_x, _y, w, h);
-	graphicsWindow->resized(_x, _y, w, h);
-	viewer->getCamera()->setViewport(0, 0, w, h);
-}
+				default:
+					break;
+			}
 
-void Widget::paintGL()
-{
-	viewer->frame();
+			o->update();
+			break;
+		}
+
+		default:
+			return QObject::eventFilter(obj, event);
+	}
+
+	//Standard event processing
+	return QObject::eventFilter(obj, event);
 }

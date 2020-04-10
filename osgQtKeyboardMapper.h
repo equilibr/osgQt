@@ -22,52 +22,38 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#ifndef KEYBOARDMAPPER_H
+#define KEYBOARDMAPPER_H
+
+#include <QtEvents>
+
 #include "osgQtWidget.h"
 
-using namespace osgQt;
-
-Widget::Widget(
-		osgViewer::Viewer * viewer,
-		osg::Camera * camera,
-		QWidget * parent)
-	:
-	QOpenGLWidget(parent),
-	viewer(viewer),
-	graphicsWindow(
-		viewer->setUpViewerAsEmbeddedInWindow(
-			x(),
-			y(),
-			width(),
-			height()))
-
+namespace osgQt
 {
-	setMainCamera(camera);
+
+	class KeyboardMapper : public QObject
+	{
+			Q_OBJECT
+		public:
+			KeyboardMapper(Widget * parent)
+				: QObject(parent)
+			{
+				if (parent)
+					parent->installEventFilter(this);
+			}
+
+			~KeyboardMapper()
+			{
+				if (parent())
+					parent()->removeEventFilter(this);
+			}
+
+		protected:
+			bool eventFilter(QObject *obj, QEvent *event) override;
+	};
+
 }
 
-void Widget::setMainCamera(osg::Camera *camera)
-{
-	if (camera == nullptr)
-		return;
 
-	viewer->setCamera(camera);
-	camera->setGraphicsContext( graphicsWindow.get() );
-}
-
-void Widget::resizeGL(int w, int h)
-{
-	//A sanity check
-	if (viewer->getCamera() == nullptr)
-		return;
-
-	const int _x = x();
-	const int _y = y();
-
-	graphicsWindow->getEventQueue()->windowResize(_x, _y, w, h);
-	graphicsWindow->resized(_x, _y, w, h);
-	viewer->getCamera()->setViewport(0, 0, w, h);
-}
-
-void Widget::paintGL()
-{
-	viewer->frame();
-}
+#endif // KEYBOARDMAPPER_H
