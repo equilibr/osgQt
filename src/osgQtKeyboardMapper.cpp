@@ -24,6 +24,40 @@ SOFTWARE.
 
 #include "osgQtKeyboardMapper.h"
 
+#include <QMap>
+
+namespace osgQt
+{
+	const QMap<int,int> initializeKey()
+	{
+		QMap<int,int> map;
+
+		return map;
+	}
+
+	const QMap<int,int> initializeUnmodifiedKey()
+	{
+		QMap<int,int> map;
+
+		return map;
+	}
+
+	//Maps to convert the key values
+	static const QMap<int,int> keyMap = initializeKey();
+	static const QMap<int,int> unmodifiedKeyMap = initializeUnmodifiedKey();
+
+	int key(const QKeyEvent * e)
+	{
+		return 0;
+	}
+
+	int unmodifiedKey(const QKeyEvent * e)
+	{
+		return 0;
+	}
+
+}
+
 using namespace osgQt;
 
 bool KeyboardMapper::eventFilter(QObject * obj, QEvent * event)
@@ -37,8 +71,8 @@ bool KeyboardMapper::eventFilter(QObject * obj, QEvent * event)
 		{
 			const QKeyEvent * e = static_cast<QKeyEvent *>(event);
 
-			int key;
-			int unmodifiedKey;
+			const int key = osgQt::key(e);
+			const int unmodifiedKey = osgQt::unmodifiedKey(e);
 
 			switch (event->type())
 			{
