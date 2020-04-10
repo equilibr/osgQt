@@ -3,9 +3,9 @@
 
 #include <QtEvents>
 
-#include "QtOSGWidget.h"
+#include "osgQtWidget.h"
 
-namespace QtOSG
+namespace osgQt
 {
 
 	class MouseMapper : public QObject

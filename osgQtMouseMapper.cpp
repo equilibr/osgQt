@@ -1,6 +1,6 @@
-#include "QtOSGMouseMapper.h"
+#include "osgQtMouseMapper.h"
 
-using namespace QtOSG;
+using namespace osgQt;
 
 bool MouseMapper::eventFilter(QObject * obj, QEvent * event)
 {

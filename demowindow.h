@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 
-#include "QtOSGWidget.h"
+#include "osgQtWidget.h"
 #include "demosupport.h"
 
 class DemoWindow : public QMainWindow
@@ -17,7 +17,7 @@ class DemoWindow : public QMainWindow
 		//This constructor will create a view and a camera, setup a camera trackball manipulator
 		//	and install a filter to translate Qt mouse events to OSG mouse events to be able
 		//	to use the manupulator.
-		QtOSG::Widget * widget;
+		osgQt::Widget * widget;
 };
 
 #endif // DEMOWINDOW_H

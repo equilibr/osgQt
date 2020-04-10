@@ -5,7 +5,7 @@
 #include <osg/Material>
 #include <osgGA/TrackballManipulator>
 
-osg::Geode * QtOsgDemo::createScene()
+osg::Geode * osgQtDemo::createScene()
 {
 	//Create a simple scene with a pretty cylinder
 	osg::Geode * root = new osg::Geode;
@@ -24,7 +24,7 @@ osg::Geode * QtOsgDemo::createScene()
 	return root;
 }
 
-void QtOsgDemo::setupCameraManipulator(QtOSG::Widget *widget)
+void osgQtDemo::setupCameraManipulator(osgQt::Widget *widget)
 {
 	//Setup a camera manupulator
 
@@ -38,7 +38,7 @@ void QtOsgDemo::setupCameraManipulator(QtOSG::Widget *widget)
 	{0,0,1});
 }
 
-void QtOsgDemo::setupCamera(QtOSG::Widget *widget)
+void osgQtDemo::setupCamera(osgQt::Widget *widget)
 {
 	widget->getCamera()->setClearColor( osg::Vec4( 0.9f, 0.9f, 1.f, 1.f ) );
 

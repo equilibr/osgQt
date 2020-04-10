@@ -7,7 +7,7 @@
 #include <osgViewer/GraphicsWindow>
 #include <osgViewer/Viewer>
 
-namespace QtOSG
+namespace osgQt
 {
 
 	class Widget : public QOpenGLWidget

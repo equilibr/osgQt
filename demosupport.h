@@ -3,13 +3,13 @@
 
 #include <osg/Geode>
 
-#include "QtOSGWidget.h"
+#include "osgQtWidget.h"
 
-namespace QtOsgDemo
+namespace osgQtDemo
 {
 	osg::Geode * createScene();
-	void setupCameraManipulator(QtOSG::Widget * widget);
-	void setupCamera(QtOSG::Widget * widget);
+	void setupCameraManipulator(osgQt::Widget * widget);
+	void setupCamera(osgQt::Widget * widget);
 }
 
 #endif // DEMOSUPPORT_H

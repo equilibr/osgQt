@@ -1,6 +1,6 @@
-#include "QtOSGWidget.h"
+#include "osgQtWidget.h"
 
-using namespace QtOSG;
+using namespace osgQt;
 
 Widget::Widget(
 		osgViewer::Viewer * viewer,
