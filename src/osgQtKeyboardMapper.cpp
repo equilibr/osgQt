@@ -55,13 +55,11 @@ bool KeyboardMapper::eventFilter(QObject * obj, QEvent * event)
 			}
 
 			o->update();
-			break;
+			return true;
 		}
 
 		default:
+			//Standard event processing
 			return QObject::eventFilter(obj, event);
 	}
-
-	//Standard event processing
-	return QObject::eventFilter(obj, event);
 }

@@ -89,7 +89,7 @@ bool MouseMapper::eventFilter(QObject * obj, QEvent * event)
 			}
 
 			o->update();
-			break;
+			return true;
 		}
 
 		case QEvent::Wheel:
@@ -103,13 +103,11 @@ bool MouseMapper::eventFilter(QObject * obj, QEvent * event)
 						);
 
 			o->update();
-			break;
+			return true;
 		}
 
 		default:
+			//Standard event processing
 			return QObject::eventFilter(obj, event);
 	}
-
-	//Standard event processing
-	return QObject::eventFilter(obj, event);
 }
