@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 
-#include "osgQtWidget.h"
+#include "../src/osgQtWidget.h"
 #include "demosupport.h"
 
 class DemoWindow : public QMainWindow

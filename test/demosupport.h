@@ -3,7 +3,7 @@
 
 #include <osg/Geode>
 
-#include "osgQtWidget.h"
+#include "../src/osgQtWidget.h"
 
 namespace osgQtDemo
 {

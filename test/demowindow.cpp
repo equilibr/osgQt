@@ -1,7 +1,7 @@
 #include "demowindow.h"
 
-#include "osgQtMouseMapper.h"
-#include "osgQtKeyboardMapper.h"
+#include "../src/osgQtMouseMapper.h"
+#include "../src/osgQtKeyboardMapper.h"
 
 DemoWindow::DemoWindow(QWidget *parent) :
 	QMainWindow(parent),
